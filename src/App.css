@@ -1,0 +1,21 @@
+main {
+    background: #f4f4f4;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-template-rows: auto;
+    height: 100%;
+}
+
+.fund {
+    grid-column: span 3;
+    background: white;
+    width: 90%;
+    margin: 10px auto;
+    padding: 10px;
+}
+
+.graph {
+    grid-column: span 3;
+    width: 100%;
+    height: 300px;
+}
