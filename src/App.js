@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import * as axios from "axios";
 import Fund from "./components/fund/";
+import config from "./utility/config";
 
 class App extends Component {
   constructor(props) {
@@ -11,9 +12,8 @@ class App extends Component {
 
   componentDidMount() {
     axios
-      .get("http://localhost:8080/portfolio")
+      .get(config.apiURL[process.env.NODE_ENV])
       .then(res => {
-        console.log(res.data);
         this.setState({ data: res.data, fetched: true, fething: false });
       })
       .catch(err => {

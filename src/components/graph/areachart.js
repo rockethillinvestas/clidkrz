@@ -4,7 +4,6 @@ import {
   Area,
   XAxis,
   YAxis,
-  CartesianGrid,
   Tooltip,
   ResponsiveContainer
 } from "recharts";
@@ -14,7 +13,7 @@ import "moment/locale/nb";
 
 class Areachart extends Component {
   formatDate(e) {
-    return moment(e).format("LTS");
+    return moment(e).format("LT");
   }
 
   render() {
@@ -24,23 +23,32 @@ class Areachart extends Component {
     );
 
     return (
-      <ResponsiveContainer style={{ gridColumn: "span 2" }}>
+      <ResponsiveContainer>
         <AreaChart
           data={data}
           margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
         >
+          <defs>
+            <linearGradient id="colorValue" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="5%" stopColor="#3C69FC" stopOpacity={0.8} />
+              <stop offset="95%" stopColor="#6387FC" stopOpacity={0} />
+            </linearGradient>
+          </defs>
           <XAxis dataKey="timestamp" tickFormatter={this.formatDate} />
           <YAxis
             type="number"
             domain={[0, dataMax => Math.ceil(dataMax * 1.25)]}
+            axisLine={false}
           />
-          <CartesianGrid strokeDasharray="3 3" />
           <Tooltip labelFormatter={this.formatDate} />
           <Area
             type="monotone"
             dataKey="value"
-            stroke="#8884d8"
-            fill="#8884d8"
+            stroke="#1D49B0"
+            fill="url(#colorValue)"
+            fillOpacity={1}
+            strokeWidth={3}
+            dot={{ stroke: "#1D49B0", strokeWidth: 3, fill: "white" }}
           />
         </AreaChart>
       </ResponsiveContainer>
